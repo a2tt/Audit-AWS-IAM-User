@@ -36,7 +36,7 @@ def handler(event: dict, context: dict = None):
             region = trail_data['awsRegion']
 
             event_id = trail_data['eventID']
-            trail_url = configs.CLOUDTRAIL_URL.format(event_id)
+            trail_url = configs.CLOUDTRAIL_URL.format(event_id=event_id)
 
             # Prepare payload
             payload = {
