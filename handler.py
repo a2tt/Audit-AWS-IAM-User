@@ -9,6 +9,15 @@ import requests
 import configs
 
 
+def filter_exception(username, source, ip):
+    if username in configs.IGNORE_USER:
+        return True
+    if source == 'health.amazonaws.com':
+        return True
+    if ip == 'AWS Internal':
+        return True
+
+
 def handler(event: dict, context: dict = None):
     # Decode data
     data = event['awslogs']['data'].encode()
@@ -24,8 +33,6 @@ def handler(event: dict, context: dict = None):
             trail_data = json.loads(trail_log['message'])
 
             username = trail_data['userIdentity']['userName']
-            if username in configs.IGNORE_USER:
-                continue
 
             ip = trail_data['sourceIPAddress']
             event_time = ((dateutil.parser.parse(trail_data['eventTime'])
@@ -37,6 +44,9 @@ def handler(event: dict, context: dict = None):
 
             event_id = trail_data['eventID']
             trail_url = configs.CLOUDTRAIL_URL.format(event_id=event_id)
+
+            if filter_exception(username, event_source, ip) is True:
+                continue
 
             # Prepare payload
             payload = {
