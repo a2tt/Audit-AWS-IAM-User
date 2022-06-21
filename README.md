@@ -1,6 +1,6 @@
 # Audit AWS IAM Users
 
-You can use this small project to audit your AWS IAM users to prevent unexpected behavior and charge.
+You can use [this small project](https://github.com/a2tt/Audit-AWS-IAM-User.git) to audit your AWS IAM users to prevent unexpected behavior and charge.
 If you follow the steps below, you can make a small system that notifies you when an IAM user uses not only AWS console but also API call using SDK.  
 
 
@@ -32,7 +32,7 @@ First of all, you need a channel to receive an alert message through it. My favo
 You can use AWS CloudTrail to track user activity and API usage.
 
 1. Log in AWS account that has a permission for CloudTrail and for CloudWatch.
-2. Go to [CloudTrail dashboard](https://ap-northeast-2.console.aws.amazon.com/cloudtrail/home?#/dashboard) and click `Create trail`.  
+2. Go to [CloudTrail dashboard](https://ap-northeast-2.console.aws.amazon.com/cloudtrail/home?#/dashboard) and click **Create trail**.  
     <img src="https://raw.githubusercontent.com/a2tt/Audit-AWS-IAM-User/main/docs/images/trail_dashboard.png" alt="cloudtrail dashboard" width=400>
 3. Fill in the required fields and make sure you enable **CloudWatch Logs**. Then, press next button.
 4. Choose log event types you want to record and configure for them, and finish creating trail.  
@@ -49,7 +49,7 @@ You need to process and filter logs, and send message to your slack channel. We 
 1. Log in AWS account that has a permission to create AWS Lambda, and go to the page of AWS Lambda.
 2. Click **Create function**.
 3. Fill in the required form, select runtime as Python 3.9 or newer, and then create it.
-    Now, your function is created. Let's upload code used to process CloudTrail logs.
+    Now, your function is created. Let's upload code that will be used to process CloudTrail logs.
 4. Download [this repository](https://github.com/a2tt/Audit-AWS-IAM-User.git) or git clone it.  
     `$ git clone https://github.com/a2tt/Audit-AWS-IAM-User.git`  
 5. Copy `configs.example.py` to `configs.py` and modify it with yours.
@@ -72,9 +72,9 @@ You need to process and filter logs, and send message to your slack channel. We 
 Finally, you need to configure AWS CloudWatch to trigger the Lambda function.
 We are going to use **Subscription filters** functionality.
 
-1. Log in AWS account that has a permission for CloudWatch and go to **CloudWAtch - log groups** menu.
+1. Log in AWS account that has a permission for CloudWatch and go to **CloudWatch - log groups** menu.
 2. Find your cloudtrail log groups, and click the group.
-3. Click **Subscription filter** tab and press **Create - Create Lambda subscription filter**.  
+3. Click **Subscription filters** tab and press **Create - Create Lambda subscription filter**.  
     <img src="https://raw.githubusercontent.com/a2tt/Audit-AWS-IAM-User/main/docs/images/cw_subs.png" alt="subscription filter" width=400>
 4. Select your Lambda function and set log format as **Amazon CloudTrail**.
 5. This step is one of the most important and can be changed for your taste.  
