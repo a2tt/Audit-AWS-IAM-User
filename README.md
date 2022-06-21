@@ -50,7 +50,7 @@ You need to process and filter logs, and send message to your slack channel. We 
 2. Click **Create function**.
 3. Fill in the required form, select runtime as Python 3.9 or newer, and then create it.
     Now, your function is created. Let's upload code used to process CloudTrail logs.
-4. Download this repository or git clone it.  
+4. Download [this repository](https://github.com/a2tt/Audit-AWS-IAM-User.git) or git clone it.  
     `$ git clone https://github.com/a2tt/Audit-AWS-IAM-User.git`  
 5. Copy `configs.example.py` to `configs.py` and modify it with yours.
 6. Archive this directory by executing shell script.  
