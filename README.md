@@ -104,5 +104,5 @@ When you log in as an IAM user, roam about AWS console, do API call using SDK(e.
 
 ## Conclusion
 
-You should make sure that more important thing than audit is well-defined role-based access control using IAM in order to allow and restrict users to each resources.  
+You should know that well defined **Role-based Access Control** using IAM is more important than auditing.
 Nonetheless, you can use this simple system for tracking users in a small sized group.
